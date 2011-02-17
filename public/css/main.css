@@ -111,6 +111,7 @@ em {
 input {
 	font-size:3em;
 	padding:1em;
+	width: 15em;
 }
 
 #time {

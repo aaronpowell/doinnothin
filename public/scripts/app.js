@@ -16,12 +16,12 @@ doinnothin = (function(sw, $) {
 			var d2 = new Date(stats.ended);
 			$('<li>' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() + ' to ' +  d2.getHours() + ':' + d2.getMinutes() + ':' + d2.getSeconds() + ' (' + stats.seconds + 's) - <em class="editable" contenteditable="true">Description</em></li>')
 				.appendTo($('#stats ul'));
-			btn.attr('value', 'Go!');
+			btn.attr('value', 'I\'m doin\' nothin\'');
 			$('#time').text('');
 		} else {
 			sw.reset();
 			sw.start();
-			btn.attr('value', 'Stop!');
+			btn.attr('value', 'I\'m doin\' somethin\'');
 			updateCounter();
 		}
 	});
