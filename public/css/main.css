@@ -97,6 +97,7 @@ em {
 
 .editable {
 	color: #888;
+	padding:5px 0px;
 }
 
 .editable:focus {
