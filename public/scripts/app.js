@@ -1,20 +1,28 @@
-doinnothin = (function(sw) {
+doinnothin = (function(sw, $) {
 
 	var times = [];
 	
-	var btn = document.getElementById('go');
-	btn.onclick = function(e) {
+	var btn = $('#go').click(function(e) {
 		e.preventDefault();
 		if(sw.running()) {
 			console.log('stopping');
 			sw.stop();
-			times.push(sw.stats());
+			var stats = sw.stats();
+			times.push(stats);
+			if(!$('#stats ul').length) {
+				$('<ul></ul>').appendTo($('#stats'));
+			}
+			
+			var d = new Date(stats.started);
+			var d2 = new Date(stats.ended);
+			$('<li>' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() + ' to ' +  d2.getHours() + ':' + d2.getMinutes() + ':' + d2.getSeconds() + ' (' + stats.seconds + 's) - <em class="editable" contenteditable="true">Description</em></li>')
+				.appendTo($('#stats ul'));
 		} else {
 			console.log('starting');
 			sw.reset();
 			sw.start();
 		}
-	};
+	});
 	
 	return {
 		times: times,
@@ -35,4 +43,4 @@ doinnothin = (function(sw) {
 		}
 	};
 
-})(stopwatch);
+})(stopwatch, jQuery);

@@ -14,9 +14,13 @@ body {
   margin: 0 auto;
   padding: 15px 40px;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 62.5%;
   line-height: 1.75;
   color: #111;
+}
+
+#content {
+	font-size: 1em;
 }
 
 section, header, article, footer {
@@ -32,16 +36,17 @@ strong {
 }
 
 #header {
-  margin-bottom: 30px;
+  margin-bottom: 3em;
 }
 
 #title {
-  font-size: 32px;
+  font-size: 3.2em;
   color: #c40;
 }
 
 #view p {
   margin: 15px 0;
+  font-size:1.5em;
 }
 
 #view a:link,
@@ -50,35 +55,21 @@ strong {
   color: #c40;
 }
 
-#view dl {
-  width: 100%;
-  overflow: hidden;
-  margin-left: 30px;
+.info { 
+	width: 500px;
+	float:left;
+	min-height: 200px;
 }
 
-#view dl dt {
-  float: left;
-  clear: left;
+.results {
+	width: 278px;
+	float:left;
+	min-height:200px;
 }
 
-#view dl dd {
-  float: left;
-  margin-left: 10px;
+.clear {
+	clear:both;
 }
-
-#view dl dd.note {
-  clear: left;
-  margin-left: 0;
-  color: #999;
-}
-
-code {
-  display: block;
-  white-space: pre;
-  font-family: Consolas, monospace;
-  margin-left: 30px;
-}
-
 
 footer {
   margin: 50px 0 30px;
@@ -95,6 +86,19 @@ footer a:visited {
   color: #777;
 }
 
-.centre {
-	text-align: center;
+ul li {
+	font-size: 1.2em;
+	list-style: disc inside;
+}
+
+em { 
+	font-style: italic; 
+}
+
+.editable {
+	color: #888;
+}
+
+.editable:focus {
+	border: 1px solid #ccc; 
 }
