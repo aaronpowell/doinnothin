@@ -8,6 +8,8 @@ else
   set :db, CouchRest.database!( 'http://localhost:5984/doinnothin' )
 end
 
+set :haml, :format => :html5
+
 get '/' do
     haml :index
 end
@@ -16,6 +18,6 @@ get '/about' do
     haml :about
 end
 
-no_found do 
+not_found do 
     'Aww snap! Not found baby!'
 end
