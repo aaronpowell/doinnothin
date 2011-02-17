@@ -33,6 +33,12 @@ var stopwatch = (function() {
 				milliseconds: end - start,
 				seconds: (end - start) / 1000
 			};
+		},
+		currentSeconds: function() {
+			return (Date.now() - start) / 1000;
+		},
+		currentMilliseconds: function() {
+			return (Date.now() - start);
 		}
     };
 })();

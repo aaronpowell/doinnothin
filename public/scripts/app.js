@@ -5,7 +5,6 @@ doinnothin = (function(sw, $) {
 	var btn = $('#go').click(function(e) {
 		e.preventDefault();
 		if(sw.running()) {
-			console.log('stopping');
 			sw.stop();
 			var stats = sw.stats();
 			times.push(stats);
@@ -17,12 +16,22 @@ doinnothin = (function(sw, $) {
 			var d2 = new Date(stats.ended);
 			$('<li>' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() + ' to ' +  d2.getHours() + ':' + d2.getMinutes() + ':' + d2.getSeconds() + ' (' + stats.seconds + 's) - <em class="editable" contenteditable="true">Description</em></li>')
 				.appendTo($('#stats ul'));
+			btn.attr('value', 'Go!');
+			$('#time').text('');
 		} else {
-			console.log('starting');
 			sw.reset();
 			sw.start();
+			btn.attr('value', 'Stop!');
+			updateCounter();
 		}
 	});
+	
+	function updateCounter() {
+		if(sw.running()) {
+			$('#time').text('So far... ' + sw.currentSeconds() + 's');
+			setTimeout(updateCounter, 10);
+		}
+	}
 	
 	return {
 		times: times,

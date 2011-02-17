@@ -97,9 +97,24 @@ em {
 
 .editable {
 	color: #888;
-	padding:5px 0px;
+	padding:5px 2px;
 }
 
 .editable:focus {
 	border: 1px solid #ccc; 
+}
+
+.editable:hover {
+	border: 1px dashed #ccc;
+}
+
+input {
+	font-size:3em;
+	padding:1em;
+}
+
+#time {
+	font-size:3em;
+	text-shadow: #ccc 2px 2px 2px;
+	color: #222;
 }
