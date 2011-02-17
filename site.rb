@@ -1,6 +1,5 @@
 ['rubygems', 'sinatra', 'haml', 'couchrest'].each {|gem| require gem}
 require 'sinatra/reloader' if development?
-require 'newrelic_rpm' if production?
 
 if ENV['CLOUDANT_URL']
   set :db, CouchRest.database!( ENV['CLOUDANT_URL'] + '/doinnothin' )
