@@ -3,6 +3,8 @@ require 'sinatra/reloader' if development?
 
 if ENV['CLOUDANT_URL']
   set :db, CouchRest.database!( ENV['CLOUDANT_URL'] + '/doinnothin' )
+  set :views, File.dirname(__FILE__) + '/views'
+  set :public, File.dirname(__FILE__) + '/public'
 else
   set :db, CouchRest.database!( 'http://localhost:5984/doinnothin' )
 end
