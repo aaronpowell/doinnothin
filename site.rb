@@ -52,6 +52,10 @@ get '/' do
     haml :index
 end
 
+get '/about' do
+    haml :about
+end
+
 get '/login' do
 	haml :login
 end
@@ -69,10 +73,6 @@ end
 get '/logout' do
 	logout
 	redirect '/'
-end
-
-get '/about' do
-    haml :about
 end
 
 post '/save' do
