@@ -1,5 +1,11 @@
 %form{:action => '/register', :method => 'POST'}
 	%fieldset.form-body
+		- if errors.length
+			%dl.validation-message
+				%dt.heading Please correct the following errors:
+				- errors.each do |s|
+					%dt= s
+
 		.editor-label
 			%label{:for => 'username'} Username:
 		.editor-field
@@ -8,9 +14,9 @@
 		.editor-label
 			%label{:for => 'Email'} Email:
 		.editor-field
-			%input.text{:type => 'text', :name => 'Email'}
+			%input.text{:type => 'text', :name => 'email'}
 
-			.editor-label
+		.editor-label
 			%label{:for => 'password'} Password:
 		.editor-field
 			%input.text{:type => 'password', :name => 'password'}

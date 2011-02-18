@@ -3,6 +3,9 @@
    "views": {
        "by_username": {
            "map": "function(doc) { if (doc.user) emit(doc.username, doc); }"
-       }
+       },
+	   "by_email": {
+			"map": "function(doc) { if(doc.user) emit(doc.email, doc); }"
+	   }
    }
 }

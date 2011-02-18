@@ -166,3 +166,19 @@ input.go {
     margin-bottom: 10px;
     min-height: 30px;
 }
+
+.validation-message {
+	color: #c00;
+	font-size:1.1em;
+	padding-bottom:15px;
+}
+
+.validation-message dt {
+	padding-left:10px;
+}
+
+.validation-message .heading {
+	font-weight: bold;
+	font-size:1.3em;
+	padding-left:0px;
+}

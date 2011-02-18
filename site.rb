@@ -12,6 +12,10 @@ enable :sessions
 
 helpers do
 
+  def h(source)
+    escape_html(source).gsub(' ', '%20')
+  end
+
   def protected!
     unless authorized?
       redirect '/login'
@@ -64,7 +68,46 @@ get '/register' do
 end
 
 post '/register' do
+	username = params[:username]
+	errors = []
+	if username.empty?
+		errors.push('Please provide a username')
+	end
+	docs = options.db.view('users/by_username', :key => h(username))
+	if docs['rows'].length
+		errors.push('That username has already been taken')
+	end
 	
+	pwd = params[:password]
+	if pwd.empty?
+		errors.push('Please provide a password')
+	end
+	
+    email = params[:email]
+    if email.empty?
+		errors.push('An email address is required to register')
+    end
+    unless email =~ /^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$/
+        errors.push('Your email address is incorrectly formatted')
+    end
+	email = email.downcase
+	docs = options.db.view('users/by_email', :key => h(email))
+	if docs['rows'].length > 0
+		errors.push('This email address is already in use')
+	else
+		options.db.save_doc({ 
+			:email => email,
+			:username => params[:username],
+			:created => Time.now.to_s,
+			:password => encrypt_password(params[:password]),
+			:user => true.to_s
+		})
+		
+		login(username, password)
+		redirect '/'
+	end	
+	
+	haml :register, :locals => { errors: errors }
 end
 
 get '/login' do
