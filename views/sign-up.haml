@@ -1,0 +1,21 @@
+%form{:action => '/sign-up', :method => 'POST'}
+	%fieldset.form-body
+		.editor-label
+			%label{:for => 'username'} Username:
+		.editor-field
+			%input.text{:type => 'text', :name => 'username'}
+	
+		.editor-label
+			%label{:for => 'Email'} Email:
+		.editor-field
+			%input.text{:type => 'text', :name => 'Email'}
+
+			.editor-label
+			%label{:for => 'password'} Password:
+		.editor-field
+			%input.text{:type => 'password', :name => 'password'}
+		
+		.editor-label
+		.editor-field
+			%input{:type => 'submit', :value => 'Sign Up'}
+	
