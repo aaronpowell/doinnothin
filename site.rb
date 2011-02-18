@@ -12,55 +12,55 @@ enable :sessions
 
 helpers do
 
-  def display_errors(errors)
-	if errors.length > 0
-		haml :validation, :layout => false, :locals => { :errors => errors }
-	else
-		''
-	end
-  end
-
-  def h(source)
-    escape_html(source).gsub(' ', '%20')
-  end
-
-  def protected!
-    unless authorized?
-      redirect '/login'
-    end
-  end
-
-  def authorized?
-    session[:authenticated]
-  end
-  
-  def login(username, password)
-	user = options.db.view('users/by_username', :key => username)['rows']
-	if user.length == 1
-		u = user.first['value']
-		if decrypt_password(u['password']) == password
-			session[:username] = username
-			session[:api_key] = u['_id']
-			session[:authenticated] = true
-			return true
+	def display_errors(errors)
+		if errors.length > 0
+			haml :validation, :layout => false, :locals => { :errors => errors }
+		else
+			''
 		end
 	end
-	false
-  end
-  
-  def logout
-    session[:username] = nil
-	session[:api_key] = nil
-	session[:authenticated] = false
-  end
 
-  def decrypt_password(password)
-	BCrypt::Password.new(password)
-  end
-  
-  def encrypt_password(password)
-	BCrypt::Password.create(password)
-  end
+	def h(source)
+		escape_html(source).gsub(' ', '%20')
+	end
+
+	def protected!
+		unless authorized?
+			redirect '/login'
+		end
+	end
+
+	def authorized?
+		session[:authenticated]
+	end
+
+	def login(username, password)
+		user = options.db.view('users/by_username', :key => username)['rows']
+		if user.length == 1
+			u = user.first['value']
+			if decrypt_password(u['password']) == password
+				session[:username] = username
+				session[:api_key] = u['_id']
+				session[:authenticated] = true
+				return true
+			end
+		end
+		false
+	end
+
+	def logout
+		session[:username] = nil
+		session[:api_key] = nil
+		session[:authenticated] = false
+	end
+
+	def decrypt_password(password)
+		BCrypt::Password.new(password)
+	end
+
+	def encrypt_password(password)
+		BCrypt::Password.create(password)
+	end
 
 end
 
