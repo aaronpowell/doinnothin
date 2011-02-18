@@ -108,7 +108,7 @@ em {
 	border: 1px dashed #ccc;
 }
 
-input {
+input.go {
 	font-size:3em;
 	padding:1em;
 	width: 15em;

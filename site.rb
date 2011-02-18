@@ -1,6 +1,5 @@
-['rubygems', 'sinatra', 'haml', 'couchrest'].each {|gem| require gem}
+['rubygems', 'sinatra', 'haml', 'couchrest', 'bcrypt'].each {|gem| require gem}
 require 'sinatra/reloader' if development?
-require 'newrelic_rpm' if production?
 
 if ENV['CLOUDANT_URL']
   set :db, CouchRest.database!( ENV['CLOUDANT_URL'] + '/doinnothin' )
@@ -9,9 +8,67 @@ else
 end
 
 set :haml, :format => :html5
+enable :sessions
+
+helpers do
+
+  def protected!
+    unless authorized?
+      redirect '/login'
+    end
+  end
+
+  def authorized?
+    session[:authenticated]
+  end
+  
+  def login(username, password)
+	user = options.db.view('users/by_username', :key => username)['rows']
+	if user.length == 1
+		u = user.first['value']
+		if encrypt_password(u['password']) == password
+			session[:username] = username
+			session[:authenticated] = true
+			true
+		end
+	end
+	u
+  end
+  
+  def logout
+    session[:username] = nil
+	session[:authenticated] = false
+  end
+
+  def encrypt_password(password)
+	BCrypt::Password.new(password)
+  end
+  
+end
 
 get '/' do
     haml :index
+end
+
+get '/login' do
+	haml :login
+end
+
+post '/login' do
+	login(params[:username], params[:password])
+    if authorized?
+        redirect '/'
+    else
+        @error = 'Password incorrect'
+        haml :login
+    end
+end
+
+get '/logout' do
+	if authorized?
+		logout
+	end
+	redirect '/'
 end
 
 get '/about' do

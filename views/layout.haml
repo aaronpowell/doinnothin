@@ -10,6 +10,10 @@
 		#content
 			%header
 				%h1#title Doin' Nothin'!
+				- if authorized?
+					#loggedIn
+						Hello #{session[:username]}!
+						%a{:href => '/logout'} Logout
 			%div#view
 				=yield
 			%footer
