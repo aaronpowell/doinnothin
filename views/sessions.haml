@@ -1,0 +1,8 @@
+%p Below is the information about your previously saved sessions of Doin' Nothin'
+
+- sessions.each do |s|
+	#session 
+		Session from #{Time.at(s['start'].to_i / 1000).strftime('%D')}
+		%ul
+			- s['times'].map{|t| t[1]}.each do |t|
+				%li #{Time.at(t['started'].to_i / 1000).strftime('%T')} to #{Time.at(t['ended'].to_i / 1000).strftime('%T')} (#{t['seconds']}s)
