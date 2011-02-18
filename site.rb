@@ -162,6 +162,14 @@ post '/save' do
 	end
 end
 
+get '/sessions' do
+	if authorized?
+	
+	else
+		redirect '/'
+	end
+end
+
 not_found do 
     'Aww snap! Not found baby!'
 end
