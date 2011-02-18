@@ -38,7 +38,7 @@ helpers do
 	user = options.db.view('users/by_username', :key => username)['rows']
 	if user.length == 1
 		u = user.first['value']
-		if encrypt_password(u['password']) == password
+		if decrypt_password(u['password']) == password
 			session[:username] = username
 			session[:api_key] = u['_id']
 			session[:authenticated] = true
@@ -54,10 +54,14 @@ helpers do
 	session[:authenticated] = false
   end
 
-  def encrypt_password(password)
+  def decrypt_password(password)
 	BCrypt::Password.new(password)
   end
   
+  def encrypt_password(password)
+	BCrypt::Password.create(password)
+  end
+
 end
 
 get '/' do
@@ -105,13 +109,13 @@ post '/register' do
 	else
 		options.db.save_doc({ 
 			:email => email,
-			:username => params[:username],
+			:username => username,
 			:created => Time.now.to_s,
-			:password => encrypt_password(params[:password]),
-			:user => true.to_s
+			:password => encrypt_password(pwd),
+			:type => 'user'
 		})
 		
-		login(username, password)
+		login(username, pwd)
 		redirect '/'
 	end	
 	
@@ -146,7 +150,8 @@ post '/save' do
 				:user => session[:api_key],
 				:times => params[:times],
 				:start => params[:start],
-				:created => Time.now.to_s
+				:created => Time.now.to_s,
+				:type => 'session'
 			})
 			'Saved'
 		else
