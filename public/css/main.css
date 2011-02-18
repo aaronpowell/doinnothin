@@ -119,3 +119,7 @@ input {
 	text-shadow: #ccc 2px 2px 2px;
 	color: #222;
 }
+
+#total { 
+	display:none;
+}

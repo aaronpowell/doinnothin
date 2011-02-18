@@ -9,6 +9,7 @@ doinnothin = (function(sw, $) {
 			var stats = sw.stats();
 			times.push(stats);
 			if(!$('#stats ul').length) {
+				$('#total').show();
 				$('<ul></ul>').appendTo($('#stats'));
 			}
 			
@@ -33,23 +34,32 @@ doinnothin = (function(sw, $) {
 		}
 	}
 	
-	return {
+	$('#total a').click(function(e) {
+		e.preventDefault();
+		$('#total span').text(ret.totalMinutes() + ' minutes');
+	});
+	
+	var ret = {
 		times: times,
 		totalSeconds: function() {
-			return times.reduce(function(x, y) {
-				return (x.seconds || x) + y.seconds;
+			return times.map(function(x) {
+				return x.seconds;
+			}).reduce(function(x, y) {
+				return x + (y || 0);
 			});
 		},
 		totalMilliseconds: function() {
-			return times.reduce(function(x, y) {
-				return (x.milliseconds || x) + y.milliseconds;
+			return times.map(function(x) {
+				return x.milliseconds;
+			}).reduce(function(x, y) {
+				return x + (y || 0);
 			});
 		},
 		totalMinutes: function() {
-			return times.reduce(function(x, y) {
-				return (x.seconds || x) + y.seconds;
-			}) / 60;
+			return ret.totalSeconds() / 60;
 		}
 	};
+	
+	return ret;
 
 })(stopwatch, jQuery);
