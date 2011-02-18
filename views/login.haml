@@ -1,5 +1,7 @@
 %form{:action => '/login', :method => 'POST'}
 	%fieldset.form-body
+		%legend= display_errors(errors)
+
 		.editor-label
 			%label{:for => 'username'} Username:
 		.editor-field

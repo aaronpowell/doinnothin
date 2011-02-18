@@ -1,10 +1,6 @@
 %form{:action => '/register', :method => 'POST'}
 	%fieldset.form-body
-		- if errors.length
-			%dl.validation-message
-				%dt.heading Please correct the following errors:
-				- errors.each do |s|
-					%dt= s
+		%legend= display_errors(errors)
 
 		.editor-label
 			%label{:for => 'username'} Username:

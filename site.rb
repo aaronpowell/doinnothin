@@ -12,6 +12,14 @@ enable :sessions
 
 helpers do
 
+  def display_errors(errors)
+	if errors.length > 0
+		haml :validation, :layout => false, :locals => { :errors => errors }
+	else
+		''
+	end
+  end
+
   def h(source)
     escape_html(source).gsub(' ', '%20')
   end
@@ -34,10 +42,10 @@ helpers do
 			session[:username] = username
 			session[:api_key] = u['_id']
 			session[:authenticated] = true
-			true
+			return true
 		end
 	end
-	u
+	false
   end
   
   def logout
@@ -64,7 +72,7 @@ get '/register' do
 	if authorized?
 		redirect '/'
 	end
-	haml :register
+	haml :register, :locals => { errors: [] }
 end
 
 post '/register' do
@@ -114,7 +122,7 @@ get '/login' do
 	if authorized?
 		redirect '/'
 	end
-	haml :login
+	haml :login, :locals => { errors: [] }
 end
 
 post '/login' do
@@ -122,8 +130,7 @@ post '/login' do
     if authorized?
         redirect '/'
     else
-        @error = 'Password incorrect'
-        haml :login
+        haml :login, :locals => { errors: ['Username and password combination is not valid'] }
     end
 end
 
