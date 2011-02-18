@@ -6,13 +6,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 
 html {
-  margin: 20px;
 }
 
 body {
   width: 778px;
   margin: 0 auto;
-  padding: 15px 40px;
+  padding:0px 40px 15px 40px;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 62.5%;
   line-height: 1.75;
@@ -42,6 +41,30 @@ strong {
 #title {
   font-size: 3.2em;
   color: #c40;
+  float:left;
+  width: 500px;
+  display:inline-block;
+}
+
+#user-panel {
+	float:right;
+	width:100px;
+	display:inline-block;
+	padding-top:10px;
+	padding-bottom: 10px;
+	border-radius: 0 0 5px 5px;
+	background-color: #114e7a;
+	color: #fff;
+	font-weight:bold;
+	text-align:center;
+}
+
+#user-panel.logged-in {
+	width: 200px;
+}
+
+#user-panel a, #user-panel a:hover, #user-panel a:visited {
+	color: #fff;
 }
 
 #view p {
@@ -122,4 +145,24 @@ input.go {
 
 #total { 
 	display:none;
+}
+.form-body
+{
+	margin-top: 20px;
+	max-width: 700px;
+}
+.form-body .editor-label
+{
+    float: left;
+    font-weight: bold;
+    padding-top: 6px;
+	display: inline-block;
+	width: 120px;
+    margin-bottom: 10px;
+}
+.form-body .editor-field 
+{
+    margin-left: 140px;
+    margin-bottom: 10px;
+    min-height: 30px;
 }

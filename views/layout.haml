@@ -11,9 +11,12 @@
 			%header
 				%h1#title Doin' Nothin'!
 				- if authorized?
-					#loggedIn
+					#user-panel.logged-in
 						Hello #{session[:username]}!
 						%a{:href => '/logout'} Logout
+				- else
+					#user-panel.logged-out
+						%a{:href => '/login'} Login
 			%div#view
 				=yield
 			%footer

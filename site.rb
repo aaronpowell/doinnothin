@@ -28,6 +28,7 @@ helpers do
 		u = user.first['value']
 		if encrypt_password(u['password']) == password
 			session[:username] = username
+			session[:api_key] = u['_id']
 			session[:authenticated] = true
 			true
 		end
@@ -37,6 +38,7 @@ helpers do
   
   def logout
     session[:username] = nil
+	session[:api_key] = nil
 	session[:authenticated] = false
   end
 
@@ -65,14 +67,30 @@ post '/login' do
 end
 
 get '/logout' do
-	if authorized?
-		logout
-	end
+	logout
 	redirect '/'
 end
 
 get '/about' do
     haml :about
+end
+
+post '/save' do
+	if authorized?
+		if params[:times]
+			options.db.save_doc({
+				:user => session[:api_key],
+				:times => params[:times],
+				:start => params[:start],
+				:created => Time.now.to_s
+			})
+			'Saved'
+		else
+			'Invalid data submitted'
+		end
+	else
+		'No user logged in'
+	end
 end
 
 not_found do 

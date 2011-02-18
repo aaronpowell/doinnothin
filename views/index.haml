@@ -14,4 +14,6 @@
 			%em Doin' Nothin'
 		%br
 		%span
+	- if authorized?
+		%a#save{:href => '#'} Save Session
 .clear &nbsp

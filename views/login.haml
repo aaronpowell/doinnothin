@@ -1,11 +1,16 @@
 %form{:action => '/login', :method => 'POST'}
-	%label{:for => 'username'} Username:
-	%input{:type => 'text', :name => 'username'}
-	%br
+	%fieldset.form-body
+		.editor-label
+			%label{:for => 'username'} Username:
+		.editor-field
+			%input.text{:type => 'text', :name => 'username'}
 	
-	%label{:for => 'password'} Password:
-	%input{:type => 'password', :name => 'password'}
-	%br
-	
-	%input{:type => 'submit', :value => 'Login'}
+		.editor-label
+			%label{:for => 'password'} Password:
+		.editor-field
+			%input.text{:type => 'password', :name => 'password'}
+		
+		.editor-label
+		.editor-field
+			%input{:type => 'submit', :value => 'Login'}
 	
