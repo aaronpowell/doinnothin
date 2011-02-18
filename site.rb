@@ -166,7 +166,6 @@ get '/sessions' do
 	if authorized?
 		sessions = options.db.view('sessions/by_user', :key => session[:api_key])['rows']
 		haml :sessions, :locals => { sessions: sessions.map{|s| s['value']} }
-		#sessions.map{|s| s['value']}.first['times'][0.to_s].to_s
 	else
 		redirect '/'
 	end
