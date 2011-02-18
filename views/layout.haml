@@ -13,6 +13,8 @@
 				- if authorized?
 					#user-panel.logged-in
 						Hello #{session[:username]}!
+						%a{:href => '/sessions'} Sessions
+						|
 						%a{:href => '/logout'} Logout
 				- else
 					#user-panel.logged-out

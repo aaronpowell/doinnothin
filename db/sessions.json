@@ -1,0 +1,8 @@
+{
+   "_id": "_design/sessions",
+   "views": {
+       "by_user": {
+           "map": "function(doc) { if (doc.type == 'session') emit(doc._id, doc); }"
+       }
+   }
+}

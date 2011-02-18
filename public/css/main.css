@@ -48,19 +48,13 @@ strong {
 
 #user-panel {
 	float:right;
-	width:100px;
 	display:inline-block;
-	padding-top:10px;
-	padding-bottom: 10px;
+	padding:10px 25px;
 	border-radius: 0 0 5px 5px;
 	background-color: #114e7a;
 	color: #fff;
 	font-weight:bold;
 	text-align:center;
-}
-
-#user-panel.logged-in {
-	width: 200px;
 }
 
 #user-panel a, #user-panel a:hover, #user-panel a:visited {
