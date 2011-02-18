@@ -56,7 +56,21 @@ get '/about' do
     haml :about
 end
 
+get '/sign-up' do
+	if authorized?
+		redirect '/'
+	end
+	haml :sign-up
+end
+
+post '/sign-up' do
+	
+end
+
 get '/login' do
+	if authorized?
+		redirect '/'
+	end
 	haml :login
 end
 
