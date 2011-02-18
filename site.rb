@@ -56,14 +56,14 @@ get '/about' do
     haml :about
 end
 
-get '/sign-up' do
+get '/register' do
 	if authorized?
 		redirect '/'
 	end
-	haml :sign-up
+	haml :register
 end
 
-post '/sign-up' do
+post '/register' do
 	
 end
 
