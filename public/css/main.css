@@ -40,10 +40,13 @@ strong {
 
 #title {
   font-size: 3.2em;
-  color: #c40;
-  float:left;
   width: 500px;
   display:inline-block;
+}
+
+#title a , #title a:hover, #title a:visited{
+  color: #c40;
+  text-decoration:none;
 }
 
 #user-panel {
@@ -175,4 +178,13 @@ input.go {
 	font-weight: bold;
 	font-size:1.3em;
 	padding-left:0px;
+}
+
+#total, #save {
+	font-size:1.2em;
+}
+
+.saved {
+	background: transparent url(/images/accept.png) no-repeat top right;
+	padding-right:16px;
 }

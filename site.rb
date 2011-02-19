@@ -157,10 +157,10 @@ post '/save' do
 			})
 			'Saved'
 		else
-			'Invalid data submitted'
+			return 400, 'Invalid data submitted'
 		end
 	else
-		'No user logged in'
+		return 401, { 'WWW-Authenticate' => 'Basic Relm="doinnoth.in"' }, 'No user logged in'
 	end
 end
 

@@ -39,11 +39,11 @@ doinnothin = (function(sw, $) {
 		$('#total span').text(ret.totalMinutes() + ' minutes');
 	});
 	
-	$('#save').click(function(e) {
+	$('#save a').click(function(e) {
 		e.preventDefault();
 		if(times.length) {
 			$.post('/save', { start: times[0].started, times: times }, function(result) {
-				console.log(result);
+				$('#save a').addClass('saved');
 			});
 		}
 	});

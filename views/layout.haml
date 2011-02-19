@@ -9,7 +9,8 @@
 	%body
 		#content
 			%header
-				%h1#title Doin' Nothin'!
+				%h1#title 
+					%a{:href => '/'} Doin' Nothin'!
 				- if authorized?
 					#user-panel.logged-in
 						Hello #{session[:username]}!
