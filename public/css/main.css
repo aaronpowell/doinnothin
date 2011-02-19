@@ -53,7 +53,6 @@ em {
 
 #title {
   font-size: 3.2em;
-  width: 500px;
   display:inline-block;
 }
 
@@ -62,7 +61,7 @@ em {
   text-decoration:none;
 }
 
-#user-panel {
+nav {
 	float:right;
 	display:inline-block;
 	padding:10px 25px;
@@ -71,9 +70,18 @@ em {
 	color: #fff;
 	font-weight:bold;
 	text-align:center;
+	margin-right: 10px;
 }
 
-#user-panel a, #user-panel a:hover, #user-panel a:visited {
+nav.user {
+	background-color: #113e7a;
+}
+
+nav:last {
+	margin-right:none;
+}
+
+nav a, nav a:hover, nav a:visited {
 	color: #fff;
 }
 

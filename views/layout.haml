@@ -5,26 +5,26 @@
 		%link{:href => '/css/main.css', :rel => 'stylesheet', :type => 'text/css'}
 		/[if lte IE 8]
 		:javascript 
-			document.createElement('footer');document.createElement('header');
+			document.createElement('footer');document.createElement('header');document.createElement('nav');
 	%body
 		#content
 			%header
 				%h1#title 
 					%a{:href => '/'} Doin' Nothin'!
+				%nav
+					%a{:href => '/about', :title => 'About'} About
 				- if authorized?
-					#user-panel.logged-in
+					%nav.user.logged-in
 						Hello #{session[:username]}!
 						%a{:href => '/sessions'} Sessions
 						|
 						%a{:href => '/logout'} Logout
 				- else
-					#user-panel.logged-out
+					%nav.user.logged-out
 						%a{:href => '/login'} Login
 			%div#view
 				=yield
 			%footer
-				%a{:href => '/about', :title => 'About'} About
-				%br
 				A
 				%a{:href => "http://http://www.sinatrarb.com", :title => "Sinatra"} Sinatra
 				\+
