@@ -23,18 +23,22 @@
 			%div#view
 				=yield
 			%footer
+				%a{:href => '/about', :title => 'About'} About
+				%br
 				A
 				%a{:href => "http://http://www.sinatrarb.com", :title => "Sinatra"} Sinatra
 				\+
 				%a{:href => "http://haml-lang.com", :title => "Haml"} Haml
 				\+
-				%a{:href => "https://github.com/aaronpowell/doinnothin"} GitHub
-				\+
 				%a{:href => "http://couchdb.apache.org/"} CouchDB
 				\+
 				%a{:href => "https://cloudant.com/"} CloudAnt
 				\+
+				%a{:href => "http://bcrypt-ruby.rubyforge.org/"} bcrypt-ruby
+				\+
 				%a{:href => "http://heroku.com"} Heroku
+				\+
+				%a{:href => "https://github.com/aaronpowell/doinnothin"} GitHub
 				\ experiment by
 				%a{:href => "http://aaron-powell.com"} Aaron Powell
 				\.
