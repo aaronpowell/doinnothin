@@ -1,10 +1,11 @@
-doinnothin.chart = (function(Raphael, jQuery) {
+doinnothin.chart = (function(Raphael, $) {
 
 	function refresh() {
 		show(doinnothin.times);
 	};
 	
 	function show(times) {
+		$('#chart').children().remove();
 		var r = Raphael('chart'),
 			fin = function () {
 				this.flag = r.g.popup(this.bar.x, this.bar.y, (this.bar.value || "0") + 's').insertBefore(this);
