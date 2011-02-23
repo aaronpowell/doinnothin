@@ -8,22 +8,16 @@ doinnothin = (function(sw, $) {
 			sw.stop();
 			var stats = sw.stats();
 			times.push(stats);
-			if(!$('#stats ul').length) {
-				$('#total').show();
-				$('<ul></ul>').appendTo($('#stats'));
-			}
-			
-			var d = new Date(stats.started);
-			var d2 = new Date(stats.ended);
-			$('<li>' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() + ' to ' +  d2.getHours() + ':' + d2.getMinutes() + ':' + d2.getSeconds() + ' (' + stats.seconds + 's) - <em class="editable" contenteditable="true">Description</em></li>')
-				.appendTo($('#stats ul'));
 			btn.attr('value', 'I\'m doin\' nothin\'');
 			$('#time').text('');
+			eventManager.trigger('timer-stopped', e, {stats: stats});
 		} else {
 			sw.reset();
 			sw.start();
 			btn.attr('value', 'I\'m doin\' somethin\'');
 			updateCounter();
+			
+			eventManager.trigger('timer-started', e, {});
 		}
 	});
 	

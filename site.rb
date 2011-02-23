@@ -160,7 +160,7 @@ post '/save' do
 			return 400, 'Invalid data submitted'
 		end
 	else
-		return 401, { 'WWW-Authenticate' => 'Basic Relm="doinnoth.in"' }, 'No user logged in'
+		return 401, { 'WWW-Authenticate' => 'Basic Realm="doinnoth.in"' }, 'No user logged in'
 	end
 end
 
