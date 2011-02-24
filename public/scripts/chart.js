@@ -20,7 +20,7 @@ doinnothin.chart = (function(Raphael, $) {
 
 		var chart = r.g.hbarchart(10, 25, 200, 20 * times.length, [times.map(function(x) { 
 			return x.seconds;
-		})])
+		})], { type: 'soft' })
 			.hover(fin, fout);	
 	};
 	
