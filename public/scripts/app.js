@@ -101,7 +101,7 @@ window.cookieMonster = (function() {
 	};
 })();
 
-window.localDB = (function() {
+window.storageBox = (function() {
 
 	var pageStorage = (function() {
 		var db = {};
@@ -146,7 +146,7 @@ window.localDB = (function() {
 			
 			},
 			clear: function() {
-			
+				cookieMonster.add('cookieStorage', {});
 			}
 		};
 	})();
@@ -200,7 +200,8 @@ window.localDB = (function() {
 		clear: function(type) {
 			var storage = getStorage(type);
 			storage.clear();
-		}
+		},
+		getDB: getStorage
 	};
 
 })();
