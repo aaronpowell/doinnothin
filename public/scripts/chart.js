@@ -1,9 +1,5 @@
-doinnothin.chart = (function(Raphael, $) {
+window.chart = (function(Raphael, $) {
 
-	function refresh() {
-		show(doinnothin.times);
-	};
-	
 	function show(times) {
 		$('#chart').children().remove();
 		var r = Raphael('chart'),
@@ -24,12 +20,12 @@ doinnothin.chart = (function(Raphael, $) {
 			.hover(fin, fout);	
 	};
 	
-	eventManager.bind('timer-stopped', function(sender, args) {
-		refresh();
+	eventManager.bind('time-refresh', function(args) {
+		show(args.times);
 	});
 	
 	return {
-		refresh: refresh
+		show: show
 	};
 
 })(Raphael, jQuery)

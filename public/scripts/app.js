@@ -1,16 +1,25 @@
 doinnothin = (function(sw, $) {
-
-	var times = [];
+	
+	var bootup = new Date();
+	var dbId = bootup.getFullYear() + '-' + (bootup.getMonth()+1) + '-' + bootup.getDate();
+	var db = storageBox.getItem(dbId);
+	if(!db) {
+		db = {times:[]};
+		storageBox.setItem(dbId, db);
+	}
+	eventManager.trigger('time-refresh', this, { times: db.times });
 	
 	var btn = $('#go').click(function(e) {
 		e.preventDefault();
 		if(sw.running()) {
 			sw.stop();
 			var stats = sw.stats();
-			times.push(stats);
+			var db = storageBox.getItem(dbId);
+			db.times.push(stats);
+			storageBox.setItem(dbId, db);
 			btn.attr('value', 'I\'m doin\' nothin\'');
 			$('#time').text('');
-			eventManager.trigger('timer-stopped', e, {stats: stats});
+			eventManager.trigger('time-refresh', e, {stats: stats, times: db.times});
 		} else {
 			sw.reset();
 			sw.start();
@@ -35,6 +44,7 @@ doinnothin = (function(sw, $) {
 	
 	$('#save a').click(function(e) {
 		e.preventDefault();
+		var times = storageBox.getItem(dbId).times;
 		if(times.length) {
 			$.post('/save', { start: times[0].started, times: times }, function(result) {
 				$('#save a').addClass('saved');
@@ -43,8 +53,11 @@ doinnothin = (function(sw, $) {
 	});
 	
 	var ret = {
-		times: times,
+		times: function() {
+			return storageBox.getItem(dbId).times;
+		},
 		totalSeconds: function() {
+			var times = storageBox.getItem(dbId).times;
 			return times.map(function(x) {
 				return x.seconds;
 			}).reduce(function(x, y) {
@@ -52,6 +65,7 @@ doinnothin = (function(sw, $) {
 			});
 		},
 		totalMilliseconds: function() {
+			var times = storageBox.getItem(dbId).times;
 			return times.map(function(x) {
 				return x.milliseconds;
 			}).reduce(function(x, y) {
